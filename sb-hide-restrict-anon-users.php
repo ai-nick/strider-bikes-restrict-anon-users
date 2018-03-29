@@ -53,9 +53,19 @@ class Strider_Bikes_Restrict_Anon{
         add_action( 'load-post-new.php', array( $this, 'sb_bg_add_meta_boxes' ), 0 );
         add_action('wp', array($this, 'restrict_until_complete_maybe'));
         add_action('wp', array($this, 'add_menu_filter'));
-
+        
         add_action('admin_menu', array($this, 'sb_bg_restrict_anon_create_menu'));
     }
+
+function add_loginout_link( $items, $args ) {
+    if (is_user_logged_in() && $args->menu == 'primary') {
+        $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
+    }
+    elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
+        $items .= '<li><a href="'. site_url('wp-login.php') .'">Log In</a></li>';
+    }
+    return $items;
+}
 
     function sb_bg_restrict_anon_create_menu(){
             //create new top-level menu
@@ -67,6 +77,8 @@ class Strider_Bikes_Restrict_Anon{
  
     function add_menu_filter(){
         add_filter('nav_menu_link_attributes', array($this,'sb_bg_hide_appropriate_nav_links'), 10, 3);
+
+        add_filter('wp_nav_menu_items', array($this, 'add_loginout_link'), 10, 2 );
     }
     function sb_bg_hide_appropriate_nav_links($atts, $item, $args){
         if( $args->menu == 'primary' ){
