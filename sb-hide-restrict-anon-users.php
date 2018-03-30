@@ -61,8 +61,8 @@ function add_loginout_link( $items, $args ) {
     if (is_user_logged_in() && $args->menu == 'primary') {
         $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
     }
-    elseif (!is_user_logged_in() && $args->theme_location == 'primary') {
-        $items .= '<li><a href="'. site_url('wp-login.php') .'">Log In</a></li>';
+    elseif (!is_user_logged_in() && $args->menu == 'primary') {
+        $items .= '<li><a href="'. wp_login_url() .'">Log In</a></li>';
     }
     return $items;
 }
