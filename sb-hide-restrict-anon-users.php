@@ -62,6 +62,7 @@ function add_loginout_link( $items, $args ) {
         $items .= '<li><a href="'. wp_logout_url() .'">Log Out</a></li>';
     }
     elseif (!is_user_logged_in() && $args->menu == 'primary') {
+        $items .= '<li><a href="'.site_url().'/register">Register</a></li>';
         $items .= '<li><a href="'.site_url().'/login">Log In</a></li>';
     }
     return $items;
@@ -72,7 +73,7 @@ function add_loginout_link( $items, $args ) {
         add_menu_page('Strider Bikes Anon User Restrictions', 'Anon User Restrictions', 'administrator',__FILE__, array($this, 'sb_bg_restrict_pages_page') );
         //add_submenu_page(__FILE__,'Strider Bikes Bg Check Canidates', 'Background Check Candidates', 'administrator','sbbgCheckCanidates', array($this, 'sb_bg_check_candidates_admin_page'));
         //call register settings function
-        add_action( 'admin_init', array($this, 'register_sb_bg_check_settings') );
+        //add_action( 'admin_init', array($this, 'register_sb_bg_check_settings') );
     }
  
     function add_menu_filter(){
