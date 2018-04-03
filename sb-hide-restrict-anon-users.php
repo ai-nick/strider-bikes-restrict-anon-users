@@ -127,7 +127,7 @@ function add_loginout_link( $items, $args ) {
 
     function lp_unlock_check_ze_page($cPageId, $metaKey){
             $cUser = learn_press_get_current_user();
-            $lockVar = get_post_meta($cPageId, $metaKey, false)[0];
+            $lockVar = get_post_meta($cPageId, $metaKey, true);
             $isUnlocked = true;
             if($lockVar<1){
                 return $isUnlocked;
